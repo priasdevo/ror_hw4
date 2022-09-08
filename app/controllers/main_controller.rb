@@ -3,6 +3,7 @@ class MainController < ApplicationController
     @subn = params[:subjectno]
     @score = params[:Score]
     @subj = params[:subject]
+    @recur = params[:recur]
     if @score == nil
       @score = []
     end
