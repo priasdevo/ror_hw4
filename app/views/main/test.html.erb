@@ -1,0 +1,45 @@
+<h1>Main#test</h1>
+<p>Find me in app/views/main/test.html.erb</p>
+<% k=0 %>
+
+<%= form_with url: '/main/test', method: 'post', data: {turbo: false} do |form| %>
+	<%= form.hidden_field :subjectno,value:@subn%>
+	<% i=0 %>
+	
+	<%
+		if @subj == nil
+			@subj = []
+		end 
+		if @score == nil
+			@score = []
+		end
+	%>
+	<%loop do%>
+		<%
+			if @subj[i] == nil || @subj[i] == ""
+				@subj[i] = ""
+				k = k+1
+			end
+			if @score[i] == nil || @score[i] == ""
+				@score[i] = ""
+				k = k+1
+			end
+		%>
+		<% i=i+1%>
+		<%= form.label :query, "Subject " %><%=i%><%=" :"%>
+		  <%= form.text_field :"subject[]" ,value:@subj[i-1]%>
+		  <%= form.label :query, "Score:" %>
+		  
+		  <%= form.number_field :"Score[]" ,value:@score[i-1]%>
+		  <br><br>
+
+		<% break if i>@subn.to_i-1 %>
+
+	<% end %>
+  <%= form.submit "Submit" %>
+  <%= form.hidden_field :redi,value:k%>
+
+
+
+
+<% end %>
