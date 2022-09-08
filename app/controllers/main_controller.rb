@@ -10,7 +10,18 @@ class MainController < ApplicationController
       @subj = []
     end
     if @score.length.to_i == @subn.to_i && @subj.length.to_i == @subn.to_i
-        redirect_to :controller=>'main',:action=>'cal_post',:Score=>@score,:subj=>@subj,:subn=>@subn
+        check = 0
+        i=0
+        loop do
+          i=i+1
+          if @score[i-1]=="" || @subj[i-1]==""
+            check=check+1
+          end
+          break if i>@subn.to_i-1
+        end
+        if check==0
+          redirect_to :controller=>'main',:action=>'cal_post',:Score=>@score,:subj=>@subj,:subn=>@subn
+        end
     end
   end
 
